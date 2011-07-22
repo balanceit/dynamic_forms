@@ -1,0 +1,14 @@
+Dynamic forms
+=============
+
+.Setup
+* Run ./setup.sh to get the required gems & create the db
+* Manually download opensource version of Extjs 4 into public\extjs
+
+.Optional
+* Install shotgun (allows editing files without restarting sinatra)
+
+.Run
+* ruby main.rb  (or shotgun main.rb)
+
+Browse to /projects
