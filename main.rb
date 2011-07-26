@@ -7,13 +7,11 @@ require 'erubis'
 require 'json'
 
 configure do
-  # connect to SQLite3
-  ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => "dbfile.sqlite3")
-  
+  ActiveRecord::Base.establish_connection(YAML::load(File.open('config/database.yml'))["development"]) 
 end
 
 get '/' do
-  'Hello world!'
+  'dynamic forms works. <a href="/projects">Projects</a>'
 end
 
 get '/projects' do
