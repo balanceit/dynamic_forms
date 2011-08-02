@@ -2,13 +2,48 @@ Dynamic forms
 =============
 
 .Setup
-* Run ./setup.sh to get the required gems & create the db
+* Run ./setup.sh to get the required gems 
 * Manually download opensource version of Extjs 4 into public\extjs
-
+* Run 'rake db:migration' to create the db & setup the tables
+  
 .Optional
 * Install shotgun (allows editing files without restarting sinatra)
 
 .Run
 * ruby main.rb  (or shotgun main.rb)
 
-Browse to /projects
+Browse to /
+
+
+ARCHITECTURE
+
+API
+- Resources accessable by HTTP via a RESTful API
+
+- The API operates on these primary Resource types
+-- Product
+-- Goal
+
+- Resource models are represneted in JSON format in both requests & responses
+- HTTP GET, POST, PUT and DELETE
+- Standard API
+-- GET /products    (get all)
+-- GET /products/new  (get form for create)
+-- POST /products   (create)
+-- GET /products/1  (read)
+-- POST /products/1 (update)
+-- DELETE /products/1 (delete)
+
+- Request headers required: 
+-- Authorization
+-- Content type
+
+- Stateless
+
+
+
+TODO
+- Get a page up to add a Product
+- When view products have a grid of Goals
+- Get a page to add a Goal
+- Add QA to Product & Goal bit have them share the same controller code

@@ -1,18 +1,21 @@
 Ext.require([
-    'Ext.data.*',
-    'Ext.grid.*'
+'Ext.data.*',
+'Ext.grid.*'
 ]);
 
-Ext.onReady(function(){
-    Ext.define('Project',{
-		extend: 'Ext.data.Model',
+
+
+
+function listProjects() {
+    Ext.define('Project', {
+        extend: 'Ext.data.Model',
         fields: ['id', 'name']
     });
 
     // create the Data Store
-    var store = Ext.create('Ext.data.Store',{
+    var store = Ext.create('Ext.data.Store', {
         model: 'Project',
-		autoload: true,
+        autoload: true,
         proxy: {
             // load using HTTP
             type: 'ajax',
@@ -23,7 +26,7 @@ Ext.onReady(function(){
                 root: 'projects',
                 record: 'project',
                 totalRecords: 'total',
-				successProperty: 'success'
+                successProperty: 'success'
             }
         }
     });
@@ -32,12 +35,45 @@ Ext.onReady(function(){
     var grid = new Ext.grid.GridPanel({
         store: store,
         columns: [
-            {text: "id", flex: 1, dataIndex: 'id', sortable: true},
-            {text: "Name", width: 180, dataIndex: 'name', sortable: true}
+        {
+            text: "id",
+            flex: 1,
+            dataIndex: 'id',
+            sortable: true
+        },
+        {
+            text: "Name",
+            width: 180,
+            dataIndex: 'name',
+            sortable: true
+        }
         ],
-        renderTo:'example-grid',
+        renderTo: 'example-grid',
         width: 540,
-        height: 200
+        height: 200,
+        dockedItems: [{
+            xtype: 'toolbar',
+            dock: 'top',
+            items: [{
+                iconCls: 'icon-save',
+                itemId: 'save',
+                text: 'Save',
+                disabled: true,
+                scope: this,
+                handler: this.onSave
+            },
+            {
+                iconCls: 'icon-user-add',
+                text: 'Create',
+                scope: this,
+                handler: addProject
+            }
+            ]
+        }]
     });
-	store.load();
-});
+
+	function addProject() {
+		window.location.href = '/projects/add';
+	}
+    store.load();
+};

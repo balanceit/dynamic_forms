@@ -15,7 +15,18 @@ get '/' do
 end
 
 get '/projects' do
-  erubis :projects
+  erubis :'project/list'
+end
+
+get '/projects/add' do
+  project = Project.new
+  erubis :'project/edit', :locals => { :project => project }
+end
+
+post '/projects' do
+  project = Project.new(:name => request.POST['name']);
+  project.save
+  redirect '/projects'
 end
 
 get '/projects.json' do
