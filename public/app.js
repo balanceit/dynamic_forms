@@ -46,6 +46,38 @@ function listProjects() {
             width: 180,
             dataIndex: 'name',
             sortable: true
+        },
+        {
+            xtype: 'actioncolumn',
+            width: 50,
+            items: [{
+                icon   : '/images/delete.gif',  // Use a URL in the icon config
+                tooltip: 'Delete',
+                handler: function(grid, rowIndex, colIndex) {
+                    var rec = store.getAt(rowIndex);
+					var delRequest = Ext.Ajax.request({
+					    url: '/projects/' + rec.get('id'),
+					    params: {
+					        _method: 'delete'
+					    },
+						method: 'post',
+					    success: function(response){
+					        var text = response.responseText;
+					        console.log(text);
+							store.load();
+					    }
+					});	
+					delRequest.request();
+                }
+            },
+			{
+                icon   : '/images/book.png',  // Use a URL in the icon config
+                tooltip: 'Edit',
+                handler: function(grid, rowIndex, colIndex) {
+                    var rec = store.getAt(rowIndex);
+                    window.location.href = '/projects/' + rec.get('id');
+                }
+            }]
         }
         ],
         renderTo: 'example-grid',
@@ -54,14 +86,7 @@ function listProjects() {
         dockedItems: [{
             xtype: 'toolbar',
             dock: 'top',
-            items: [{
-                iconCls: 'icon-save',
-                itemId: 'save',
-                text: 'Save',
-                disabled: true,
-                scope: this,
-                handler: this.onSave
-            },
+            items: [
             {
                 iconCls: 'icon-user-add',
                 text: 'Create',

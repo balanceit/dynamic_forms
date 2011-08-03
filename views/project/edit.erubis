@@ -18,14 +18,28 @@
 
     	    var bd = Ext.getBody();
 
+          Ext.define('Project', {
+                extend: 'Ext.data.Model',
+                fields: ['id', 'name']
+            });
+          var record =   Ext.ModelManager.create({
+                name : '<%= project.name =%>',
+                id  : <%= project.id =%>
+            }, 'Project');
+          
     	    /*
     	     * ================  Simple form  =======================
     	     */
     	    bd.createChild({tag: 'h2', html: 'Edit Project'});
-
+          
+          
 
     	    var simple = Ext.create('Ext.form.Panel', {
-    	        url:'/projects',
+    	          url: <% if project.new_record? %>
+    	                  '/projects' 
+    	               <% else %>
+    	                  '/projects/<%= project.id %>'
+    	              <% end %>,
     	        standardSubmit: true,    				  
     	        frame:true,
     	        title: 'Project',
@@ -78,6 +92,7 @@
     				    }]
     				  
     	    });
+    	  simple.loadRecord(record);
     		simple.render(document.body);
     };
     
