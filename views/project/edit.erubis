@@ -23,8 +23,8 @@
                 fields: ['id', 'name']
             });
           var record =   Ext.ModelManager.create({
-                name : '<%= project.name =%>',
-                id  : <%= project.id =%>
+                name : '<%= project.name =%>'
+                <% if !project.new_record? %>,id  : <%= project.id =%><% end %>
             }, 'Project');
           
     	    /*

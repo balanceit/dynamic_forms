@@ -55,13 +55,15 @@ post '/projects/:id' do
   project = Project.find(params[:id])
   project.attributes = params
   project.save!
-  "Updated ok"
+  # TODO - Notify of success - how?  
+  "OK <a href='/projects'>Return to list</a>"
 end
 
 delete '/projects/:id' do
   project = Project.find(params[:id])
   project.delete
-  "deleted ok"
+  # TODO - Notify of success - how?  
+  "OK <a href='/projects'>Return to list</a>"
 end
 
 post '/projects' do

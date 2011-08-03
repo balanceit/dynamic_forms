@@ -88,7 +88,7 @@ function listProjects() {
             dock: 'top',
             items: [
             {
-                iconCls: 'icon-user-add',
+                icon: '/images/add.gif',
                 text: 'Create',
                 scope: this,
                 handler: addProject
