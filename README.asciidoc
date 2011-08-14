@@ -8,7 +8,7 @@ Dynamic forms
   
 .Optional
 * Install shotgun (allows editing files without restarting sinatra)
-* Install asciidoc
+* Install asciidoc.
 
 .Test data
 * To load some test data 'rake db:test_data'
