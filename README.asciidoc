@@ -8,6 +8,10 @@ Dynamic forms
   
 .Optional
 * Install shotgun (allows editing files without restarting sinatra)
+* Install asciidoc
+
+.Test data
+* To load some test data 'rake db:test_data'
 
 .Run
 * ruby main.rb  (or shotgun main.rb)
@@ -21,18 +25,17 @@ API
 - Resources accessable by HTTP via a RESTful API
 
 - The API operates on these primary Resource types
--- Product
--- Goal
+-- Product    /projects
+-- Goal       /projects/{project_id}/goals
 
-- Resource models are represneted in JSON format in both requests & responses
+- Resource models are represented as HTML forms
 - HTTP GET, POST, PUT and DELETE
 - Standard API
--- GET /products    (get all)
--- GET /products/new  (get form for create)
--- POST /products   (create)
--- GET /products/1  (read)
--- POST /products/1 (update)
--- DELETE /products/1 (delete)
+-- GET /projects      Get a list of Projects. Optional query string 'q=', optional pagination 'start=, end=, rows='
+-- POST /projects     Create a new Project
+-- GET /products/1    Get a project
+-- PUT /products/1    Update a Project 
+-- DELETE /products/1 Delete a Project
 
 - Request headers required: 
 -- Authorization

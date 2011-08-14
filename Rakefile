@@ -8,6 +8,7 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'active_record'
 require 'logger'
+require 'db/test_data/testdata'
 
 
 task :environment do   
@@ -23,4 +24,12 @@ namespace :db do
     ActiveRecord::Migration.verbose = true
     ActiveRecord::Migrator.migrate("db/migrate")
   end
+  
+  
+  desc "Create some test data"
+  task(:test_data => :environment) do
+    ActiveRecord::Base.logger = Logger.new(STDOUT)
+    TestData.new.run
+  end
+  
 end

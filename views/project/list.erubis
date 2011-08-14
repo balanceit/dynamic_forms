@@ -1,21 +1,40 @@
-
 <html> 
 <head> 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
-<title>All Projects</title> 
-    <link rel="stylesheet" type="text/css" href="/extjs/resources/css/ext-all.css" /> 
-    <script type="text/javascript" src="/extjs/ext-all.js"></script> 
-    <script type="text/javascript" src="/app.js"></script> 
-    <script>
-    Ext.onReady(listProjects);
-    </script>
+  <title>List Projects</title> 
 </head> 
 <body> 
     <h1>Projects</h1> 
-    <p>Loads data from <a href="projects.json">projects.json</a></p> 
-    
-    <!-- a place holder for the grid. requires the unique id to be passed in the javascript function, and width and height ! --> 
-    <div id="example-grid"></div> 
+    <table summary="Projects">
+      
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      
+        <% projects.each do |project| %>
+          <tr>
+            <td><%= project.id =%></td>
+            <td><%="<a href='/projects/#{project.id}'>#{project.name}</a>"=%></td>
+          </tr>
+        <% end %>
+      
+      <tfooter>
+        <tr>
+          <td>
+              <% if offset > 0 %>
+                <a href="<%="/projects?q=#{q}&offset=#{offset - limit}&limit=#{limit}"=%>">Previous</a>
+              <% end %>
+          </td>
+          <td>
+              <% if projects.size == limit %>
+                <a href="<%="/projects?q=#{q}&offset=#{offset + limit}&limit=#{limit}"=%>">Next</a>
+              <% end %>
+          </td>
+        </tr>
+      </tfooter>
+    </table>
 </body> 
 </html>
 
